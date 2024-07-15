@@ -9,11 +9,13 @@ const App = () => {
   
   return (
     <div className="">
-      {a.map((data) => (
-        <p>{data}</p>
-      ))}
-      {/* <p className="">a</p> */}
-      {/* {JSON.stringify(a)} */}
+      {/* {a.map((data) => (
+        <p
+          style={{
+            paddingLeft: `${data.indent * 32}px`
+          }}
+        >{data.line}</p>
+      ))} */}
     </div>
   )
 }

@@ -1,50 +1,23 @@
-// export const iterate = (obj: object, indent = 0): any[] => {
-//   const jsonLines: any[] = [];
-//   for (var property in obj) {
-//     if (obj.hasOwnProperty(property)) {
-//       if (typeof obj[property] == "object" && !Array.isArray(obj[property])) {
-//         console.log("  ".repeat(indent) + property + ":");
-//         jsonLines.push("  ".repeat(indent) + property + ":");
-//         iterate(obj[property], indent + 1);
-//       } 
-//       else if (Array.isArray(obj[property])) {
-//         console.log("  ".repeat(indent) + property + ":");
-//         jsonLines.push("  ".repeat(indent) + property + ":");
-//         obj[property].forEach((item: any) => {
-//           console.log("  ".repeat(indent + 1) + item);
-//           jsonLines.push("  ".repeat(indent + 1) + item);
-//         });
-//       } 
-//       else {
-//         console.log("  ".repeat(indent) + property + ": " + obj[property]);
-//         jsonLines.push("  ".repeat(indent) + property + ": " + obj[property]);
-//       }
-//     }
-//   }
+import { JsonLine } from "@/type/type";
 
-//   return jsonLines;
-// }
+export const iterate = (obj: object, indent = 0): JsonLine[] => {
+  const jsonLines: JsonLine[] = [];
 
-export const iterate = (obj: object, indent = 0): any[] => {
-  const jsonLines: any[] = [];
-  for (var property in obj) {
+  for (const property in obj) {
     if (obj.hasOwnProperty(property)) {
       if (typeof obj[property] === "object" && !Array.isArray(obj[property])) {
-        // console.log("  ".repeat(indent) + property + ":");
-        jsonLines.push("  ".repeat(indent) + property + ":");
+        jsonLines.push({ indent, line: property + ":" });
         jsonLines.push(...iterate(obj[property], indent + 1));
       } else if (Array.isArray(obj[property])) {
-        // console.log("  ".repeat(indent) + property + ":");
-        jsonLines.push("  ".repeat(indent) + property + ":");
+        jsonLines.push({ indent, line: property + ":" });
         obj[property].forEach((item: any) => {
-          // console.log("  ".repeat(indent + 1) + item);
-          jsonLines.push("  ".repeat(indent + 1) + item);
+          jsonLines.push({ indent: indent + 1, line: item });
         });
       } else {
-        // console.log("  ".repeat(indent) + property + ": " + obj[property]);
-        jsonLines.push("  ".repeat(indent) + property + ": " + obj[property]);
+        jsonLines.push({ indent, line: `${property}: ${obj[property]}` });
       }
     }
   }
+
   return jsonLines;
-}
+};
