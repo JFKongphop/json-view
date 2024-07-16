@@ -1,12 +1,14 @@
-import Render from "./component/json/Render";
-import { example } from "./constants/example_2";
+import JsonUpload from "./component/json/JsonUpload";
 
-const App = () => {  
+const App = () => {
   return (
-    <div className="">
-      <Render json={example} />
+    <div className="App" style={{ padding: '20px' }}>
+      <header className="App-header">
+        <h1>JSON File Upload</h1>
+        <JsonUpload />
+      </header>
     </div>
-  )
+  );
 }
 
 export default App;
