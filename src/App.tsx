@@ -3,14 +3,15 @@ import { iterate  } from "./utils/json-render";
 
 
 const App = () => {
-  const a = iterate(example)
+  const a = iterate(example.quiz)
   
   console.log(a)
   
   return (
     <div className="">
-      {a.map((data) => (
+      {a.map((data, index) => (
         <p
+          key={index}
           style={{
             paddingLeft: `${data.indent * 32}px`
           }}
